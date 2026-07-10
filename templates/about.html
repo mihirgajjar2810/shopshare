@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us | ShopShare{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 text-white fw-bold mb-4">About ShopShare</h1>
+            <p class="lead text-secondary mb-5">
+                ShopShare is a modern E-Commerce platform built with Django. It empowers shopkeepers to seamlessly manage their inventory, and allows customers to explore and securely purchase products.
+            </p>
+        </div>
+    </div>
+    
+    <div class="row g-4 mt-2 text-center">
+        <!-- Feature 1 -->
+        <div class="col-md-4">
+            <div class="card bg-dark border-secondary h-100 shadow-sm p-4">
+                <div class="card-body">
+                    <div class="display-5 text-warning mb-3">
+                        <i class="bi bi-cart-check"></i>
+                    </div>
+                    <h4 class="text-white">Seamless Shopping</h4>
+                    <p class="text-secondary mt-3">Add items to your cart, and breeze through checkout with our streamlined interface.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-md-4">
+            <div class="card bg-dark border-secondary h-100 shadow-sm p-4">
+                <div class="card-body">
+                    <div class="display-5 text-warning mb-3">
+                        <i class="bi bi-shop"></i>
+                    </div>
+                    <h4 class="text-white">Vendor Tools</h4>
+                    <p class="text-secondary mt-3">Shopkeepers get an isolated dashboard to manage orders containing their specific products.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-md-4">
+            <div class="card bg-dark border-secondary h-100 shadow-sm p-4">
+                <div class="card-body">
+                    <div class="display-5 text-warning mb-3">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h4 class="text-white">Secure Platform</h4>
+                    <p class="text-secondary mt-3">Built with security in mind using Django's robust auth systems and modular design patterns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

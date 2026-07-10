@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Dashboard | ShopShare{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar Profile Info -->
+        <div class="col-md-3 mb-4">
+            <div class="card bg-dark border-secondary shadow-sm text-center">
+                <div class="card-body">
+                    <img src="https://ui-avatars.com/api/?name={{ request.user.username }}&background=ffc107&color=000" class="rounded-circle mb-3" alt="Profile" style="width: 100px;">
+                    <h5 class="text-white fw-bold">{{ request.user.username }}</h5>
+                    <p class="text-secondary small mb-1">{{ request.user.email }}</p>
+                    <span class="badge bg-primary">Customer</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders List -->
+        <div class="col-md-9">
+            <div class="card bg-dark border-secondary shadow-sm">
+                <div class="card-header border-secondary bg-transparent py-3">
+                    <h5 class="mb-0 text-white fw-bold">My Orders</h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if orders%}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">Order ID</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td class="ps-4 text-warning">#{{ order.id }}</td>
+                                    <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                    <td>${{ order.total_cost }}</td>
+                                    <td>
+                                        {% if order.paid %}
+                                            <span class="badge bg-success">Paid</span>
+                                        {% else %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% endif %}
+                                        
+                                        {% if order.status == 'Shipped' %}
+                                            <span class="badge bg-info">Shipped</span>
+                                        {% elif order.status == 'Delivered' %}
+                                            <span class="badge bg-secondary">Delivered</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <p class="text-secondary mb-3">You haven't placed any orders yet.</p>
+                        <a href="{% url 'product_list' %}" class="btn btn-outline-warning">Start Shopping</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

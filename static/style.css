@@ -1,0 +1,13 @@
+h1{
+    color: blue;
+    margin-top: 25px;
+}
+.custome-search{
+    width: 500px;
+    max-width: 100%;
+}
+.nav-link_active{
+    margin-top: 100;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,104 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-3" href="/">
+            ShopShare
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse"
+             id="navbarContent">
+
+            <!-- Left Menu -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/",>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'product_list' %}">
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for c in global_categories %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'product_list_by_category' c.slug %}">
+                                {{ c.name }}
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li>
+                            <a class="dropdown-item text-muted" href="#">No Categories Yet</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">
+                        About
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Search Bar -->
+            <form class="d-flex me-3" method="GET">
+                <input class="form-control me-2"
+                       type="search"
+                       name="q"
+                       placeholder="Search products...">
+                <button class="btn btn-warning" type="submit">
+                    Search
+                </button>
+            </form>
+
+            <!-- Cart -->
+            <a href="{% url 'view_cart' %}" class="btn btn-outline-light position-relative me-3">Cart
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ cart_count }}
+                </span>
+            </a>
+
+            <!-- User Auth -->
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                    {{ request.user.username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="d-flex">
+                 <a href="{% url 'login' %}"
+                     class="btn btn-outline-light me-2">Login</a>
+                 <a href="{% url 'register' %}" 
+                    class="btn btn-warning">Register</a> 
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
